@@ -1,0 +1,844 @@
+.newsletter-container {
+  width: 100%;
+  padding: 4rem 2rem;
+  color: #FFFFFF;
+  margin-top: 2rem;
+}
+
+.newsletter-header {
+  text-align: left;
+  margin-bottom: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.newsletter-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #FFFFFF;
+}
+
+.newsletter-header p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.explore-btn, .subscribe-btn {
+  padding: 0.8rem 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 180px;
+  text-align: center;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.explore-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.explore-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(147, 51, 234, 0.5) 40%, rgba(211, 129, 223, 0.5) 100%);
+  opacity: 50%;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.explore-btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.explore-btn:hover {
+  filter: brightness(1.2);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.subscribe-btn {
+  background: radial-gradient(308.33% 308.33% at 53.98% 55.95%, rgba(0, 0, 0, 0.8) 0%, rgba(147, 51, 234, 0.4) 50%) ;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #FFFFFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.subscribe-btn:hover {
+  filter: brightness(1.2);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.newsletter-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 400px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.newsletter-card {
+  display: flex;
+  flex-direction: row !important;
+  width: 1200px;
+  min-width: 1200px;
+  height: 400px;
+  min-height: 400px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  background: #181818;
+  scroll-snap-align: start;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.card-image {
+  width: 50%;
+  min-width: 50%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #222;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  display: block;
+  background: #222;
+}
+
+.card-content {
+  width: 50%;
+  min-width: 50%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 3rem;
+  background: linear-gradient(90deg, #181818 80%, #222 100%);
+  border-radius: 0;
+}
+
+.card-content-inner {
+  max-width: 90%;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+
+.card-content-inner h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.card-content-inner p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.learn-more-btn {
+  background: linear-gradient(90deg, #9333ea 40%, #d381df 100%);
+  border: none;
+  border-radius: 50px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.9rem 2.2rem;
+  margin-top: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(147,51,234,0.08);
+  transition: filter 0.2s;
+}
+
+.learn-more-btn:hover {
+  filter: brightness(1.15);
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 54px;
+  height: 54px;
+  font-size: 2rem;
+  z-index: 2;
+  background: transparent;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.scroll-btn:hover {
+  opacity: 1;
+}
+
+.scroll-btn.left {
+  left: -32px;
+}
+
+.scroll-btn.right {
+  right: -32px;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .newsletter-card {
+    height: 380px;
+    min-width: 760px;
+  }
+  
+  .card-content {
+    padding: 2.5rem;
+    text-align: left;
+  }
+  
+  .card-content h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+
+  .card-content p {
+    font-size: 1.05rem;
+    margin-bottom: 1.8rem;
+    text-align: left;
+  }
+
+  .explore-btn, .subscribe-btn {
+    width: 170px;
+    padding: 0.75rem 1.8rem;
+    font-size: 0.95rem;
+  }
+
+  .explore-btn {
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .scroll-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+
+  .scroll-btn.left {
+    left: -22px;
+  }
+
+  .scroll-btn.right {
+    right: -22px;
+  }
+}
+
+@media (max-width: 1200px), (max-width: 1024px), (max-width: 900px), (max-width: 768px), (max-width: 576px), (max-width: 480px), (max-width: 375px) {
+  .newsletter-card {
+    flex-direction: row !important;
+    width: 100vw;
+    min-width: 0;
+    height: 320px;
+    min-height: 220px;
+  }
+  .card-image, .card-content {
+    width: 50%;
+    min-width: 50%;
+    height: 100%;
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .newsletter-container {
+    padding: 3rem 1rem;
+  }
+
+  .newsletter-header {
+    text-align: left;
+  }
+
+  .newsletter-header h2 {
+    font-size: 3rem;
+  }
+
+  .newsletter-header p {
+    font-size: 1rem;
+    margin: 0 auto 2rem;
+  }
+
+  .cta-buttons {
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
+
+  .explore-btn, .subscribe-btn {
+    width: 140px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.8rem;
+  }
+
+  .explore-btn {
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .scroll-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .scroll-btn.left {
+    left: -18px;
+  }
+
+  .scroll-btn.right {
+    right: -18px;
+  }
+
+  .newsletter-slider {
+    padding: 0 2rem;
+  }
+
+  .newsletter-luxury-section {
+    padding: 3rem 1rem;
+  }
+
+  .newsletter-luxury-header h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  .newsletter-luxury-header p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .luxury-slider-cards {
+    height: auto;
+  }
+
+  .newsletter-luxury-form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newsletter-luxury-input,
+  .newsletter-luxury-btn {
+    width: 100%;
+    max-width: 400px; /* Constrain the width on mobile */
+  }
+}
+
+@media (max-width: 576px) {
+  .newsletter-card {
+    height: 300px;
+    min-width: 600px;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    text-align: left;
+  }
+
+  .card-content h3 {
+    font-size: 1.7rem;
+    margin-bottom: 0.6rem;
+    text-align: left;
+  }
+
+  .card-content p {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .cta-buttons {
+    gap: 0.6rem;
+  }
+
+  .explore-btn, .subscribe-btn {
+    width: 130px;
+    padding: 0.55rem 1.3rem;
+    font-size: 0.75rem;
+  }
+
+  .explore-btn {
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .scroll-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .scroll-btn.left {
+    left: -18px;
+  }
+
+  .scroll-btn.right {
+    right: -18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsletter-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .newsletter-card {
+    height: 280px;
+    min-width: 560px;
+  }
+
+  .card-content {
+    padding: 1.3rem;
+    text-align: left;
+  }
+
+  .card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+
+  .card-content p {
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+    text-align: left;
+  }
+
+  .cta-buttons {
+    gap: 0.5rem;
+  }
+
+  .explore-btn, .subscribe-btn {
+    width: 120px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.7rem;
+  }
+
+  .explore-btn {
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .newsletter-slider {
+    padding: 0 1.5rem;
+  }
+
+  .scroll-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+  .scroll-btn.left {
+    left: -17px;
+  }
+
+  .scroll-btn.right {
+    right: -17px;
+  }
+}
+
+@media (max-width: 375px) {
+  .newsletter-card {
+    height: 260px;
+    min-width: 520px;
+  }
+
+  .card-content {
+    padding: 1.2rem;
+    text-align: left;
+  }
+
+  .card-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+    text-align: left;
+  }
+
+  .card-content p {
+    font-size: 0.75rem;
+    margin-bottom: 0.7rem;
+    text-align: left;
+  }
+
+  .cta-buttons {
+    gap: 0.4rem;
+  }
+
+  .explore-btn, .subscribe-btn {
+    width: 110px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.65rem;
+  }
+
+  .explore-btn {
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .scroll-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .scroll-btn.left {
+    left: -16px;
+  }
+
+  .scroll-btn.right {
+    right: -16px;
+  }
+}
+
+.subscribe-form-newsletter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+}
+
+.subscribe-input-newsletter {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  min-width: 200px; /* Ensure input is not too small */
+  transition: all 0.3s ease;
+}
+
+.subscribe-input-newsletter:focus {
+  outline: none;
+  border-color: #9333EA;
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.3);
+}
+
+.subscribe-input-newsletter::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.subscribe-button-newsletter {
+  background: radial-gradient(308.33% 308.33% at 53.98% 55.95%, rgba(0, 0, 0, 0.8) 0%, rgba(147, 51, 234, 0.4) 50%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #FFFFFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.8rem 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 180px;
+  text-align: center;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribe-button-newsletter:hover {
+  filter: brightness(1.2);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.subscription-message {
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.subscription-message.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.subscription-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+@media (max-width: 768px) {
+  .subscribe-form-newsletter {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .subscribe-input-newsletter {
+    min-width: unset;
+    width: 100%;
+  }
+  .subscribe-button-newsletter {
+    width: 100%;
+  }
+  .subscription-message {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .newsletter-card {
+    width: 100vw;
+    min-width: 0;
+    height: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+}
+
+.newsletter-luxury-section {
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.newsletter-luxury-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.newsletter-luxury-header p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.newsletter-luxury-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.newsletter-luxury-input {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #181818;
+  color: #fff;
+  width: 300px;
+}
+
+.newsletter-luxury-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 24px;
+  border: 1.5px solid #b9a9d0;
+  background: linear-gradient(135deg, #1a0826 0%, #2d133b 60%, #3a1c4d 100%);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: filter 0.2s, box-shadow 0.2s;
+  box-shadow: 0px 4px 12px 0px rgba(0,0,0,0.18);
+}
+
+.newsletter-luxury-btn:hover {
+  filter: brightness(1.15);
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(255,255,255,0.18);
+}
+
+/* Slider container */
+.newsletter-luxury-slider {
+  position: relative;
+}
+
+/* Cards container for DESKTOP: displays 4 cards */
+.luxury-slider-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Individual card styling */
+.luxury-slider-card {
+  background: #181818;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* These styles are for the desktop grid, they will be overridden on mobile */
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  position: static !important;
+}
+
+.luxury-slider-img-wrap img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.luxury-slider-content {
+  padding: 1.5rem;
+}
+
+.luxury-slider-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  min-height: 50px; /* Give space for 2 lines of text */
+}
+
+.luxury-slider-content p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+  min-height: 100px; /* Give space for multiple lines */
+}
+
+.luxury-learn-more {
+  background: none;
+  border: none;
+  color: #9333ea;
+  cursor: pointer;
+  padding: 0;
+  font-weight: bold;
+}
+
+/* Arrows are hidden on desktop by default */
+.luxury-slider-arrow {
+  display: none;
+}
+
+/* MOBILE STYLES */
+@media (max-width: 768px) {
+  .newsletter-luxury-header h2 {
+    font-size: 2rem;
+  }
+  .newsletter-luxury-header p {
+    font-size: 1rem;
+  }
+  
+  /* On mobile, the container becomes a standard slider */
+  .luxury-slider-cards {
+    display: block; /* No more grid */
+    position: relative;
+    overflow: hidden;
+    height: 480px; /* Adjust height for a single card */
+  }
+
+  .luxury-slider-card {
+    position: absolute !important; /* Allow JS to position */
+    width: 100%;
+    opacity: 0 !important;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+
+  .luxury-slider-card.active {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  /* Show arrows on mobile */
+  .luxury-slider-arrow {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .luxury-slider-arrow.left { left: 10px; }
+  .luxury-slider-arrow.right { right: 10px; }
+}
