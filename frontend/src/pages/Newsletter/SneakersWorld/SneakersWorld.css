@@ -81,9 +81,11 @@
 @media (max-width: 767px) {
   .sw-title-line1 { font-size: 44px; }
   .sw-title-line2 { font-size: 60px; }
+
 }
 
 @media (max-width: 479px) {
   .sw-title-line1 { font-size: 38px; }
   .sw-title-line2 { font-size: 52px; }
+  .sw-section {margin-bottom: 140px;}
 }

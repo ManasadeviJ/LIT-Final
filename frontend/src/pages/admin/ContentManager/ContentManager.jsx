@@ -73,7 +73,7 @@ const MailContentManager = () => {
         return allItems.filter(item => item.categoryName === categoryFilter);
     }, [newsletterContent, categoryFilter]);
 
-    const handleView = (item) => navigate(`/article/${item._id}`);
+    const handleView = (item) => navigate(`/admin/article/${item._id}`);
     const handleEdit = (item) => navigate(`/admin/mail/edit/${item._id}`);
     const handleDelete = (itemToDelete) => {
         showConfirmation(`Delete "${itemToDelete.caption || itemToDelete.data}" permanently?`, async () => {
@@ -250,13 +250,13 @@ const WebsiteArticleList = () => {
                                     <td>{article.location || '-'}</td>
                                     <td>{article.category || '-'}</td>
                                     <td>
-                                        <span className={`status-pill ${article.status?.toLowerCase() || 'draft'}`}>
-                                            {article.status || 'Draft'}
+                                        <span className={`status-pill ${article.status?.toLowerCase() || 'published'}`}>
+                                            {article.status || 'Published'}
                                         </span>
                                     </td>
                                     <td>{article.publishDate || '-'}</td>
                                     <td className="action-cell">
-                                        <button onClick={() => navigate(`/article/${article.slug}`)} className="action-icon view" title="View"><FaEye /></button>
+                                        <button onClick={() => navigate(`/admin/article/${article.slug}`)} className="action-icon view" title="View"><FaEye /></button>
                                         <button onClick={() => navigate(`/admin/editor/${section}/${article.slug}`)} className="action-icon edit" title="Edit"><FaPen /></button>
                                         <button onClick={() => handleDelete(article.slug, article.title)} className="action-icon delete" title="Delete"><FaTrash /></button>
                                     </td>

@@ -113,7 +113,7 @@ const ArticleListPage = () => {
                   </td>
                   <td className="action-cell">
                     <a
-                      href={`/article/${article.slug}`}
+                      onClick={() => navigate(`/admin/article/${article.slug}`)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="action-icon view"

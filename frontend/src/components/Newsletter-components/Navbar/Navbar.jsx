@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
+
 import litLogo from '../../../assets/lit-logo.png';
 import profileAvatar from '../../../assets/profile-avatar.png';
 import notificationIcon from '../../../assets/notification-icon.svg';
@@ -8,6 +10,7 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   // Handle scroll effect
   useEffect(() => {
@@ -29,11 +32,17 @@ const Navbar = () => {
   // Handle link click
   const handleLinkClick = (link) => {
     setActiveLink(link);
+    setIsMenuOpen(false); // close menu on link click (for mobile UX)
   };
 
   // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Navigate to profile page
+  const handleProfileClick = () => {
+    navigate('/profile');
   };
 
   return (
@@ -44,7 +53,7 @@ const Navbar = () => {
             <img src={litLogo} alt="LIT Logo" className="logo-img" />
           </a>
         </div>
-        
+
         <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
           <a 
             href="#game-modes" 
@@ -55,7 +64,7 @@ const Navbar = () => {
           </a>
           <a 
             href="/shop" 
-            className={activeLink === 'marketplace' ? 'active' : ''} 
+            className={activeLink === 'shop' ? 'active' : ''} 
             onClick={() => handleLinkClick('shop')}
           >
             Marketplace
@@ -69,7 +78,7 @@ const Navbar = () => {
           </a>
           <a 
             href="/newsletter" 
-            className={activeLink === 'newsletters' ? 'active' : ''} 
+            className={activeLink === 'newsletter' ? 'active' : ''} 
             onClick={() => handleLinkClick('newsletter')}
           >
             Newsletter
@@ -89,12 +98,16 @@ const Navbar = () => {
             IR Icon
           </a>
         </div>
-        
+
         <div className="navbar-right">
           <div className="notification-icon">
             <img src={notificationIcon} alt="Notifications" className="notification-img" />
           </div>
-          <div className="navbar-avatar">
+          <div 
+            className="navbar-avatar" 
+            onClick={handleProfileClick} 
+            style={{ cursor: 'pointer' }}
+          >
             <img src={profileAvatar} alt="User Avatar" className="avatar-img" />
           </div>
           <div className="hamburger-menu" onClick={toggleMenu}>
@@ -108,4 +121,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

@@ -12,6 +12,7 @@ import './LandingPage.css';
 const LandingPage = () => {
   return (
     <div className="landing-page">
+
       <JoinCommunity />
       <Background>
         <LitGame />

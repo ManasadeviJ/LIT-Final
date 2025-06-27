@@ -50,6 +50,7 @@
 
 .footer-main-nav a:hover {
   opacity: 0.8;
+  color: #a855f7;
 }
 
 @media screen and (max-width: 1400px) {
@@ -191,6 +192,7 @@
   cursor: pointer;
   transition: transform 0.3s ease;
   width: 150px;
+  
   padding: 0;
 }
 
@@ -199,8 +201,8 @@
 }
 
 .store-button img {
-  width: 100%;
-  height: auto;
+  width: 160px;
+  height: 55px;
 }
 
 /* Footer Bottom */
@@ -219,6 +221,33 @@
   color: rgba(255, 255, 255, 0.6);
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.footer-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.dropdown-item {
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 0.3rem 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  color: #a855f7; /* Tailwind's purple-500 */
 }
 
 /* Tablet View */
@@ -320,4 +349,7 @@
   .store-button {
     width: 140px;
   }
-} 
+
+}
+
+/* End of Footer CSS */
