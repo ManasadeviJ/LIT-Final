@@ -62,7 +62,7 @@ const ArticlePage = () => {
         <ShareButtons articleTitle={article.title} />
         <RelatedArticles articles={relatedArticles} />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

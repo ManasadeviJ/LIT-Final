@@ -7,8 +7,8 @@ import Shop from './Shop/Shop';
 import UnfoldingSoonSection from './UnfoldingSoonSection/UnfoldingSoonSection';
 import Testimonials from './Testimonials/Testimonials';
 import RegisterInterest from './RegisterInterest/RegisterInterest';
+import Footer from './Newsletter-components/Footer/Footer';
 import './LandingPage.css';
-
 const LandingPage = () => {
   return (
     <div className="landing-page">
@@ -20,6 +20,7 @@ const LandingPage = () => {
         <UnfoldingSoonSection />
         <Testimonials />
         <RegisterInterest />
+        <Footer />
       </Background>
     </div>
   );

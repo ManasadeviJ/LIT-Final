@@ -1,25 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { ThemeProvider, CssBaseline } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Contexts
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { AuthProvider } from './context/context-admin/AuthContext';
 import { DataProvider } from './context/context-admin/DataContext';
-// Theme
-import theme from './theme';
 
-// Layout & UI   lit-integrated\frontend\src\components\admin-components\ProtectedRoute.jsx
-import Footer from './components/Footer/Footer';
-import LandingPageNavbar from './components/Newsletter-components/Navbar/Navbar';
+// Layout & UI
 import Background from './components/Background/Background';
+import Footer from "./components/Newsletter-components/Footer/Footer";
+import LandingPageNavbar from './components/Newsletter-components/Navbar/Navbar';
 import Navbar from './components/Newsletter-components/Navbar/Navbar';
 import MainLayout from './components/Newsletter-components/MainLayout/MainLayout';
 import ProtectedRoute from './components/admin-components/ProtectedRoute';
 import AdminLayout from './components/admin-components/AdminLayout';
 
-// E-commerce & General Pages
+// Pages
 import LandingPage from './components/LandingPage';
 import Shop from './pages/Shop';
 import ProductDetails from './components/Shop/ProductDetails';
@@ -34,7 +31,6 @@ import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
 import NotFound from './pages/NotFound';
 
-// Admin Pages
 import AdminLogin from './pages/AdminLogin';
 import SignUpPage from './pages/admin/Auth/SignUpPage';
 import AdminDashboard from './pages/admin/AdminDashboard/AdminDashboard';
@@ -42,34 +38,30 @@ import ContentManager from './pages/admin/ContentManager/ContentManager';
 import ArticleEditor from './pages/admin/ArticleEditor/ArticleEditor';
 import MailAdderPage from './pages/admin/MailAdderPage/MailAdderPage';
 import MailItemEditor from './pages/admin/MailItemEditor/MailItemEditor';
-import AdminArticlePage from './pages/admin/ArticlePage'; // NEW: admin article
+import AdminArticlePage from './pages/admin/ArticlePage';
 
-// Newsletter Pages
 import NewsletterPage from './pages/Newsletter/NewsletterPage/NewsletterPage';
-import NewsletterArticlePage from './pages/Newsletter/ArticlePage/ArticlePage'; // NEW: newsletter article
+import NewsletterArticlePage from './pages/Newsletter/ArticlePage/ArticlePage';
 
-// App Content Layout Handler
 const AppContent = () => {
   const location = useLocation();
 
   const isAdminPath = location.pathname.startsWith('/admin');
   const isNewsletterPath = location.pathname.startsWith('/newsletter');
   const isNewsletterArticle = location.pathname.startsWith('/newsletter/article');
-  const isArticleAdmin = location.pathname.startsWith('/admin/article');
 
   const showMainNavbar = !isAdminPath && !isNewsletterPath && !isNewsletterArticle;
   const showNewsletterNavbar = isNewsletterPath || isNewsletterArticle;
   const showFooter = !isAdminPath;
 
   return (
-    <>
-      <Background />
+    <Background>
       {showMainNavbar && <LandingPageNavbar />}
       {showNewsletterNavbar && <Navbar />}
 
-      <main style={{ flex: 1 }}>
+      <main style={{ flex: 1, width: '100%' }}>
         <Routes>
-          {/* Landing / E-commerce */}
+          {/* Public */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductDetails />} />
@@ -89,12 +81,10 @@ const AppContent = () => {
           </Route>
           <Route path="/newsletter/article/:slug" element={<NewsletterArticlePage />} />
 
-          {/* Admin Auth + Public Admin Article */}
+          {/* Admin */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/signup" element={<SignUpPage />} />
           <Route path="/admin/article/:slug" element={<AdminArticlePage />} />
-
-          {/* Admin Protected Routes */}
           <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/website" element={<ContentManager section="website" />} />
@@ -105,33 +95,29 @@ const AppContent = () => {
             <Route path="/admin/editor/:section/:slug" element={<ArticleEditor />} />
           </Route>
 
-          {/* Catch-All */}
+          {/* Fallback */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
       {showFooter && <Footer />}
-    </>
+    </Background>
   );
 };
 
-// App Root with Providers
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <CartProvider>
-        <WishlistProvider>
-          <AuthProvider>
-            <DataProvider>
-              <Router>
-                <AppContent />
-              </Router>
-            </DataProvider>
-          </AuthProvider>
-        </WishlistProvider>
-      </CartProvider>
-    </ThemeProvider>
+    <CartProvider>
+      <WishlistProvider>
+        <AuthProvider>
+          <DataProvider>
+            <Router>
+              <AppContent />
+            </Router>
+          </DataProvider>
+        </AuthProvider>
+      </WishlistProvider>
+    </CartProvider>
   );
 };
 

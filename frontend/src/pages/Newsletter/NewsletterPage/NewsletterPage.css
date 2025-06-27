@@ -6,6 +6,7 @@
   position: relative;
   /* We will set height dynamically via inline style, but a min-height is good for loading */
   min-height: 100vh; 
+  background: transparent;
 }
 
 .flip-card-inner {

@@ -1,18 +1,18 @@
-/* --- Base & Mobile Styles --- */
+/* === Luxury Fashion Section === */
 .lf-section {
-  margin-bottom: 80px;
+  margin-bottom: 120px;
 }
 .lf-title-container {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 .lf-title-line1, .lf-title-line2 {
   font-family: var(--font-body);
   font-weight: 500;
-  line-height: 0.1;
+  line-height: 1.1;
   text-transform: uppercase;
 }
-.lf-title-line1 { font-size: 44px; }
-.lf-title-line2 { font-size: 60px; }
+.lf-title-line1 { font-size: 64px; }
+.lf-title-line2 { font-size: 82px; }
 
 .lf-grid-container {
   display: flex;
@@ -26,34 +26,23 @@
   max-width: 400px;
 }
 
-/* On mobile, all cards are square */
 .lf-grid-container .card-image-container {
   aspect-ratio: 1 / 1;
 }
 
-/* --- Tablet View & Up (≥ 768px) --- */
 @media (min-width: 768px) {
-  .lf-title-line1 { font-size: 54px; }
+  .lf-title-line1 { font-size: 64px; }
   .lf-title-line2 { font-size: 72px; }
-
   .lf-grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     justify-items: center;
   }
-
-  /* --- FIX: Target .card-image-container --- */
   .lf-card-large .card-image-container,
   .lf-card-tall .card-image-container {
     aspect-ratio: 679 / 453;
   }
-  .lf-card-1 .card-image-container,
-  .lf-card-2 .card-image-container,
-  .lf-card-3 .card-image-container {
-    aspect-ratio: 1 / 1;
-  }
-
   .lf-grid-container {
     grid-template-areas:
       "card1   card2"
@@ -64,17 +53,13 @@
   .lf-card-2 { grid-area: card2; }
   .lf-card-large { grid-area: large; }
   .lf-card-tall { grid-area: tall; }
-
   .lf-card-3 {
     grid-area: card3;
     max-width: 390px;
   }
-  .lf-card-wrapper {
-    max-width: none;
-  }
+  .lf-card-wrapper { max-width: none; }
 }
 
-/* --- Medium & Desktop View (≥ 1024px) --- */
 @media (min-width: 1024px) {
   .lf-grid-container {
     grid-template-columns: repeat(6, 1fr);
@@ -83,16 +68,20 @@
       "large large large tall  tall  tall";
     align-items: end;
   }
-  .lf-card-3 {
-    max-width: none;
-  }
+  .lf-card-3 { max-width: none; }
 }
 
-/* --- Large Desktop View (≥ 1200px) --- */
-@media (min-width: 1200px) {
-  .lf-section {
-    margin-bottom: 120px;
-  }
+@media (max-width: 1023px) {
   .lf-title-line1 { font-size: 64px; }
-  .lf-title-line2 { font-size: 82px; }
+  .lf-title-line2 { font-size: 72px; }
+}
+
+@media (max-width: 767px) {
+  .lf-title-line1 { font-size: 44px; }
+  .lf-title-line2 { font-size: 60px; }
+}
+
+@media (max-width: 479px) {
+  .lf-title-line1 { font-size: 38px; }
+  .lf-title-line2 { font-size: 52px; }
 }

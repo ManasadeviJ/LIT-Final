@@ -8,6 +8,7 @@ import LuxuryFashion from '../LuxuryFashion/LuxuryFashion';
 import FastFashion from '../FastFashion/FastFashion';
 import FashionSection from '../FashionSection/FashionSection';
 import SneakersWorld from '../SneakersWorld/SneakersWorld';
+import Background from '../../../components/Background/Background';
 
 const NewsletterPage = () => {
   const frontContentRef = useRef(null);
@@ -113,6 +114,7 @@ const NewsletterPage = () => {
   if (error) return <h2 style={{ color: 'red', textAlign: 'center', marginTop: '150px' }}>Error: {error}</h2>;
 
   return (
+    // <Background 
     <div className="page-flip-container" style={{ height: containerHeight }}>
       <div className={`flip-card-inner ${showBack ? 'is-flipped' : ''}`}>
         
@@ -127,7 +129,7 @@ const NewsletterPage = () => {
             <div className="page-container">
               {renderSections(articlesForFrontFace)}
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
 
@@ -142,7 +144,7 @@ const NewsletterPage = () => {
             <div className="page-container">
               {renderSections(domesticContent)}
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
 
