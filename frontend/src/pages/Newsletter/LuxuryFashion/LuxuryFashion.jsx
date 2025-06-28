@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LuxuryFashion.css';
 import Card from "../../../components/Newsletter-components/shared/Card/Card.jsx";
-// The component is now "dumb" and receives 'posts' as a prop
-const LuxuryFashion = ({ posts }) => { 
+
+const LuxuryFashion = ({ posts }) => {
+  const [showMore, setShowMore] = useState(false);
+
   if (!posts || posts.length === 0) {
-    return null;
+    return (
+      <section className="lf-section">
+        <div className="lf-title-container">
+          <h2 className="lf-title-line1">LUXURY</h2>
+          <h2 className="lf-title-line2">FASHION</h2>
+        </div>
+        <p className="no-posts-message">No luxury fashion articles available.</p>
+      </section>
+    );
   }
+
+  const featuredPosts = posts.slice(0, 5);
+  const remainingPosts = posts.slice(5);
 
   return (
     <section className="lf-section">
@@ -13,36 +26,60 @@ const LuxuryFashion = ({ posts }) => {
         <h2 className="lf-title-line1">LUXURY</h2>
         <h2 className="lf-title-line2">FASHION</h2>
       </div>
+
+      {/* Featured Grid (5 styled posts) */}
       <div className="lf-grid-container">
-        {posts[0] && (
+        {featuredPosts[0] && (
           <div className="lf-card-wrapper lf-card-1">
-            <Card {...posts[0]} articleUrl={`/newsletter/article/${posts[0].slug}`} />
+            <Card {...featuredPosts[0]} articleUrl={`/newsletter/article/${featuredPosts[0].slug}`} />
           </div>
         )}
-        {posts[1] && (
+        {featuredPosts[1] && (
           <div className="lf-card-wrapper lf-card-2">
-            <Card {...posts[1]} articleUrl={`/newsletter/article/${posts[1].slug}`} />
+            <Card {...featuredPosts[1]} articleUrl={`/newsletter/article/${featuredPosts[1].slug}`} />
           </div>
         )}
-        {posts[2] && (
+        {featuredPosts[2] && (
           <div className="lf-card-wrapper lf-card-3">
-            <Card {...posts[2]} articleUrl={`/newsletter/article/${posts[2].slug}`} />
+            <Card {...featuredPosts[2]} articleUrl={`/newsletter/article/${featuredPosts[2].slug}`} />
           </div>
         )}
-        {posts[3] && (
+        {featuredPosts[3] && (
           <div className="lf-card-wrapper lf-card-large">
-            <Card {...posts[3]} articleUrl={`/newsletter/article/${posts[3].slug}`} />
+            <Card {...featuredPosts[3]} articleUrl={`/newsletter/article/${featuredPosts[3].slug}`} />
           </div>
         )}
-        {posts[4] && (
+        {featuredPosts[4] && (
           <div className="lf-card-wrapper lf-card-tall">
-            <Card {...posts[4]} articleUrl={`/newsletter/article/${posts[4].slug}`} />
+            <Card {...featuredPosts[4]} articleUrl={`/newsletter/article/${featuredPosts[4].slug}`} />
           </div>
         )}
       </div>
+
+      {/* Extra Posts Grid */}
+      {showMore && remainingPosts.length > 0 && (
+        <div className="lf-grid-extra">
+          {remainingPosts.map((post) => (
+            <div className="lf-card-wrapper" key={post.slug}>
+              <Card {...post} articleUrl={`/newsletter/article/${post.slug}`} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Read More / Read Less Toggle */}
+      {remainingPosts.length > 0 && (
+        <div className="read-more-container">
+          <button
+            className="read-more-button"
+            onClick={() => setShowMore(!showMore)}
+          >
+            {showMore ? 'Read Less' : 'Read More'}
+          </button>
+        </div>
+      )}
     </section>
   );
 };
-
 
 export default LuxuryFashion;

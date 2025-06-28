@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useData } from '../../../context/context-admin/DataContext';
-import { FaEye, FaPen, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaEye, FaPen, FaTrash, FaPlus, FaEllipsisV } from 'react-icons/fa';
 import './ContentManager.css';
 
 const ContentManager = ({ section }) => {
@@ -15,6 +15,7 @@ const MailContentManager = () => {
     const navigate = useNavigate();
     const { newsletterContent, updateNewsletterContent, showConfirmation, showNotification } = useData();
     const [categoryFilter, setCategoryFilter] = useState('All');
+    const [openMenuId, setOpenMenuId] = useState(null);
 
     const ALL_MAIL_CATEGORIES = useMemo(() => {
         if (!newsletterContent || !newsletterContent.categories) return ['All'];
@@ -57,8 +58,10 @@ const MailContentManager = () => {
             }
         };
 
-        fetchAll();
-    }, []);
+        if (!newsletterContent.categories) {
+            fetchAll();
+        }
+    }, [newsletterContent.categories, updateNewsletterContent]);
 
     const flattenedItems = useMemo(() => {
         if (!newsletterContent || !newsletterContent.categories) return [];
@@ -73,9 +76,17 @@ const MailContentManager = () => {
         return allItems.filter(item => item.categoryName === categoryFilter);
     }, [newsletterContent, categoryFilter]);
 
-    const handleView = (item) => navigate(`/admin/article/${item._id}`);
-    const handleEdit = (item) => navigate(`/admin/mail/edit/${item._id}`);
+    const handleMenuToggle = (itemId) => setOpenMenuId(prevId => (prevId === itemId ? null : itemId));
+    const handleView = (item) => {
+        navigate(`/admin/article/${item._id}`);
+        setOpenMenuId(null);
+    };
+    const handleEdit = (item) => {
+        navigate(`/admin/mail/edit/${item._id}`);
+        setOpenMenuId(null);
+    };
     const handleDelete = (itemToDelete) => {
+        setOpenMenuId(null);
         showConfirmation(`Delete "${itemToDelete.caption || itemToDelete.data}" permanently?`, async () => {
             const updatedContent = JSON.parse(JSON.stringify(newsletterContent));
             const filtered = updatedContent.categories[itemToDelete.categoryId].filter(i => i._id !== itemToDelete._id);
@@ -91,6 +102,7 @@ const MailContentManager = () => {
                 <h1>Mail Content Manager</h1>
                 <Link to="/admin/mail/add" className="create-btn"><FaPlus /> Add New Content</Link>
             </header>
+            
             <div className="filter-bar">
                 <div className="filter-group">
                     <label>Filter by Category</label>
@@ -110,21 +122,38 @@ const MailContentManager = () => {
                     </div>
                 </div>
             </div>
+
             <div className="list-table-container">
                 {flattenedItems.length > 0 ? (
                     <table className="content-table">
                         <thead>
-                            <tr><th>Caption / Data</th><th>Category</th><th style={{ textAlign: 'right' }}>Actions</th></tr>
+                            <tr>
+                                <th>Caption / Data</th>
+                                <th className="hide-on-mobile">Category</th>
+                                <th style={{ textAlign: 'right' }}>Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {flattenedItems.map((item) => (
                                 <tr key={item._id}>
                                     <td className="title-cell">{item.caption || item.data || '(No Caption)'}</td>
-                                    <td>{item.categoryName}</td>
+                                    <td className="hide-on-mobile">{item.categoryName}</td>
                                     <td className="action-cell">
-                                        <button onClick={() => handleView(item)} className="action-icon view" title="View"><FaEye /></button>
-                                        <button onClick={() => handleEdit(item)} className="action-icon edit" title="Edit"><FaPen /></button>
-                                        <button onClick={() => handleDelete(item)} className="action-icon delete" title="Delete"><FaTrash /></button>
+                                        <div className="desktop-actions">
+                                            <button onClick={() => handleView(item)} className="action-icon view" title="View"><FaEye /></button>
+                                            <button onClick={() => handleEdit(item)} className="action-icon edit" title="Edit"><FaPen /></button>
+                                            <button onClick={() => handleDelete(item)} className="action-icon delete" title="Delete"><FaTrash /></button>
+                                        </div>
+                                        <div className="mobile-actions">
+                                            <button onClick={() => handleMenuToggle(item._id)} className="action-icon mobile-menu-trigger"><FaEllipsisV /></button>
+                                            {openMenuId === item._id && (
+                                                <div className="mobile-action-menu">
+                                                    <button onClick={() => handleView(item)}><FaEye /> View</button>
+                                                    <button onClick={() => handleEdit(item)}><FaPen /> Edit</button>
+                                                    <button onClick={() => handleDelete(item)}><FaTrash /> Delete</button>
+                                                </div>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -148,11 +177,12 @@ const WebsiteArticleList = () => {
     const [categoryFilter, setCategoryFilter] = useState('All');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [openMenuId, setOpenMenuId] = useState(null);
 
     const section = 'website';
     const CATEGORIES = ['All', 'SustainableFashion', 'LuxuryFashion', 'FastFashion', 'SneakerWorld'];
     const LOCATIONS = ['All', 'Domestic', 'International'];
-
+    
     useEffect(() => {
         const fetchArticles = async () => {
             try {
@@ -177,14 +207,18 @@ const WebsiteArticleList = () => {
         });
     }, [articles, locationFilter, categoryFilter]);
 
+    const handleMenuToggle = (articleId) => setOpenMenuId(prevId => (prevId === articleId ? null : articleId));
+    const handleNavigate = (path) => {
+        navigate(path);
+        setOpenMenuId(null);
+    };
     const handleDelete = async (slug, title) => {
+        setOpenMenuId(null);
         const confirmDelete = window.confirm(`Delete "${title}" permanently?`);
         if (!confirmDelete) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/articles/slug/${slug}`, {
-                method: 'DELETE',
-            });
+            const res = await fetch(`http://localhost:5000/api/articles/slug/${slug}`, { method: 'DELETE' });
             if (!res.ok) throw new Error('Failed to delete article');
             setArticles(prev => prev.filter(article => article.slug !== slug));
             alert('Article deleted successfully');
@@ -227,19 +261,15 @@ const WebsiteArticleList = () => {
             </div>
 
             <div className="list-table-container">
-                {loading ? (
-                    <p>Loading...</p>
-                ) : error ? (
-                    <p style={{ color: 'red' }}>{error}</p>
-                ) : filteredArticles.length > 0 ? (
+                {loading ? <p>Loading...</p> : error ? <p style={{ color: 'red' }}>{error}</p> : filteredArticles.length > 0 ? (
                     <table className="content-table">
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Location</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Publish Date</th>
+                                <th className="hide-on-mobile">Location</th>
+                                <th className="hide-on-mobile">Category</th>
+                                <th className="hide-on-mobile">Status</th>
+                                <th className="hide-on-mobile">Publish Date</th>
                                 <th style={{ textAlign: 'right' }}>Actions</th>
                             </tr>
                         </thead>
@@ -247,18 +277,30 @@ const WebsiteArticleList = () => {
                             {filteredArticles.map((article) => (
                                 <tr key={article._id}>
                                     <td className="title-cell">{article.title}</td>
-                                    <td>{article.location || '-'}</td>
-                                    <td>{article.category || '-'}</td>
-                                    <td>
+                                    <td className="hide-on-mobile">{article.location || '-'}</td>
+                                    <td className="hide-on-mobile">{article.category ? article.category.replace(/([A-Z])/g, ' $1').trim() : '-'}</td>
+                                    <td className="hide-on-mobile">
                                         <span className={`status-pill ${article.status?.toLowerCase() || 'published'}`}>
                                             {article.status || 'Published'}
                                         </span>
                                     </td>
-                                    <td>{article.publishDate || '-'}</td>
+                                    <td className="hide-on-mobile">{article.publishDate ? new Date(article.publishDate).toLocaleDateString() : '-'}</td>
                                     <td className="action-cell">
-                                        <button onClick={() => navigate(`/admin/article/${article.slug}`)} className="action-icon view" title="View"><FaEye /></button>
-                                        <button onClick={() => navigate(`/admin/editor/${section}/${article.slug}`)} className="action-icon edit" title="Edit"><FaPen /></button>
-                                        <button onClick={() => handleDelete(article.slug, article.title)} className="action-icon delete" title="Delete"><FaTrash /></button>
+                                        <div className="desktop-actions">
+                                            <button onClick={() => handleNavigate(`/admin/article/${article.slug}`)} className="action-icon view" title="View"><FaEye /></button>
+                                            <button onClick={() => handleNavigate(`/admin/editor/${section}/${article.slug}`)} className="action-icon edit" title="Edit"><FaPen /></button>
+                                            <button onClick={() => handleDelete(article.slug, article.title)} className="action-icon delete" title="Delete"><FaTrash /></button>
+                                        </div>
+                                        <div className="mobile-actions">
+                                            <button onClick={() => handleMenuToggle(article._id)} className="action-icon mobile-menu-trigger"><FaEllipsisV /></button>
+                                            {openMenuId === article._id && (
+                                                <div className="mobile-action-menu">
+                                                    <button onClick={() => handleNavigate(`/admin/article/${article.slug}`)}><FaEye /> View</button>
+                                                    <button onClick={() => handleNavigate(`/admin/editor/${section}/${article.slug}`)}><FaPen /> Edit</button>
+                                                    <button onClick={() => handleDelete(article.slug, article.title)}><FaTrash /> Delete</button>
+                                                </div>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

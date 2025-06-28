@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SustainableFashion.css';
 import Card from "../../../components/Newsletter-components/shared/Card/Card.jsx";
 
-const SustainableFashion = ({ posts }) => { 
+const SustainableFashion = ({ posts }) => {
+  const [showMore, setShowMore] = useState(false);
+
   if (!posts || posts.length === 0) {
-    return null;
+    return (
+      <section className="sf-section">
+        <div className="sf-title-container">
+          <h2 className="sf-title-line1">SUSTAINABLE</h2>
+          <h2 className="sf-title-line2">FASHION</h2>
+        </div>
+        <p className="no-posts-message">No sustainable fashion articles available.</p>
+      </section>
+    );
   }
 
-  // --- THIS IS THE FIX ---
-  // Take the first 2 posts for the hero section.
-  const heroPosts = posts.slice(0, 2); 
-  // Take the next 4 posts for the small grid section.
-  const smallPosts = posts.slice(2, 6); 
+  const heroPosts = posts.slice(0, 2);
+  const smallGridInitial = posts.slice(2, 6);
+  const smallGridExtra = posts.slice(6);
 
   return (
     <section className="sf-section">
@@ -20,28 +28,41 @@ const SustainableFashion = ({ posts }) => {
         <h2 className="sf-title-line2">FASHION</h2>
       </div>
 
-      {/* Only render the hero grid if there are posts for it */}
-      {heroPosts.length > 0 && (
-        <div className="sf-grid-hero">
-          {heroPosts.map(post => (
-            <div className="card-wrapper" key={post.slug}>
-              <Card 
-                imageUrl={post.imageUrl}
-                description={post.description}
-                publishDate={post.publishDate}
-                articleUrl={`/newsletter/article/${post.slug}`}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Hero Posts */}
+      <div className="sf-grid-hero">
+        {heroPosts.map((post) => (
+          <div className="card-wrapper" key={post.slug}>
+            <Card
+              imageUrl={post.imageUrl}
+              description={post.description}
+              publishDate={post.publishDate}
+              articleUrl={`/newsletter/article/${post.slug}`}
+            />
+          </div>
+        ))}
+      </div>
 
-      {/* Only render the small grid if there are posts for it */}
-      {smallPosts.length > 0 && (
-        <div className="sf-grid-small">
-          {smallPosts.map(post => (
+      {/* Initial Small Grid */}
+      <div className="sf-grid-small">
+        {smallGridInitial.map((post) => (
+          <div className="card-wrapper" key={post.slug}>
+            <Card
+              imageUrl={post.imageUrl}
+              description={post.description}
+              publishDate={post.publishDate}
+              articleUrl={`/newsletter/article/${post.slug}`}
+              location={post.location}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Extra Posts - Render only if showMore */}
+      {showMore && smallGridExtra.length > 0 && (
+        <div className="sf-grid-small extra-posts">
+          {smallGridExtra.map((post) => (
             <div className="card-wrapper" key={post.slug}>
-              <Card 
+              <Card
                 imageUrl={post.imageUrl}
                 description={post.description}
                 publishDate={post.publishDate}
@@ -50,6 +71,18 @@ const SustainableFashion = ({ posts }) => {
               />
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Toggle Button */}
+      {smallGridExtra.length > 0 && (
+        <div className="read-more-container">
+          <button
+            className="read-more-button"
+            onClick={() => setShowMore(!showMore)}
+          >
+            {showMore ? 'Read Less' : 'Read More'}
+          </button>
         </div>
       )}
     </section>

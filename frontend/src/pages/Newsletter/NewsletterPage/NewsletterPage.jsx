@@ -98,7 +98,7 @@ const NewsletterPage = () => {
       { id: 'luxury', Component: LuxuryFashion, posts: articles.filter(p => p.category === 'LuxuryFashion') },
       { id: 'fashion-feature', Component: FashionSection, post: articles.find(p => p.category === 'FashionFeature') },
       { id: 'fast', Component: FastFashion, posts: articles.filter(p => p.category === 'FastFashion') },
-      { id: 'sneakers', Component: SneakersWorld, posts: articles.filter(p => p.category === 'SneakersWorld') },
+      { id: 'sneakers', Component: SneakersWorld, posts: articles.filter(p => p.category === 'SneakerWorld') },
     ];
 
     return sections.map(section => {
