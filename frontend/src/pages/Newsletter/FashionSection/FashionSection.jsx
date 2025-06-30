@@ -15,14 +15,11 @@ const FashionSection = ({ post }) => {
       <div className="f-image-container">
         <h2 className="f-title-overlay">FASHION</h2>
         <Card 
-          // --- These props now use the dynamic data from the 'post' object ---
           imageUrl={post.imageUrl}
           description={post.description}
           publishDate={post.publishDate}
           articleUrl={`/newsletter/article/${post.slug}`}
           location={post.location}
-
-          // The Card component doesn't need a width prop here; CSS will handle it
         />
       </div>
     </section>

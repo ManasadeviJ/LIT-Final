@@ -56,7 +56,7 @@ const Navbar = () => {
 
         <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
           <a 
-            href="#game-modes" 
+            href="/game-modes" 
             className={activeLink === 'game-modes' ? 'active' : ''} 
             onClick={() => handleLinkClick('game-modes')}
           >
@@ -70,7 +70,7 @@ const Navbar = () => {
             Marketplace
           </a>
           <a 
-            href="#socials" 
+            href="/socials" 
             className={activeLink === 'socials' ? 'active' : ''} 
             onClick={() => handleLinkClick('socials')}
           >
@@ -84,14 +84,14 @@ const Navbar = () => {
             Newsletter
           </a>
           <a 
-            href="#settings" 
-            className={activeLink === 'settings' ? 'active' : ''} 
-            onClick={() => handleLinkClick('settings')}
+            href="/avatar-store" 
+            className={activeLink === 'avatar-store' ? 'active' : ''} 
+            onClick={() => handleLinkClick('avatar-store')}
           >
             Avatar Store
           </a>
           <a 
-            href="#ir-icon" 
+            href="/ir-icon" 
             className={activeLink === 'ir-icon' ? 'active' : ''} 
             onClick={() => handleLinkClick('ir-icon')}
           >

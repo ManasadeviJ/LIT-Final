@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/context-admin/AuthContext'; // ✅ Import AuthContext
 import '../styles/AdminLogin.css';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({
-    email: '',
-    password: ''
-  });
+  const { login, isAuthenticated } = useAuth(); // ✅ Use context-based login
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
+
+  // ✅ Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/admin/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,14 +28,10 @@ const AdminLogin = () => {
     e.preventDefault();
     setError('');
 
-    // Get admin credentials from environment variables
-    const adminEmail = import.meta.env.VITE_ADMIN_EMAIL || 'aimanshefa267@gmail.com';
-    const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'Aiman_lit@267';
+    const success = login(credentials.email, credentials.password); // ✅ Call login from context
 
-    // Check if credentials match the admin credentials from environment variables
-    if (credentials.email === adminEmail && credentials.password === adminPassword) {
-      // Set authentication status in session state
-      sessionStorage.setItem('adminAuthenticated', 'true');
+    if (success) {
+      console.log("Login success, navigating to /admin/dashboard");
       navigate('/admin/dashboard');
     } else {
       setError('Invalid email or password. Please try again.');
@@ -75,4 +77,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin; 
+export default AdminLogin;

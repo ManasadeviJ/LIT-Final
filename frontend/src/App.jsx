@@ -7,6 +7,9 @@ import { WishlistProvider } from './context/WishlistContext';
 import { AuthProvider } from './context/context-admin/AuthContext';
 import { DataProvider } from './context/context-admin/DataContext';
 
+//componenets
+import ComingSoonPage from './components/ComingSoonPage/ComingSoonPage';
+
 // Layout & UI
 import Background from './components/Background/Background';
 import Footer from "./components/Newsletter-components/Footer/Footer";
@@ -66,7 +69,7 @@ const AppContent = () => {
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/game-modes" element={<GameModes />} />
+          <Route path="/game-modes" element={<ComingSoonPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
@@ -74,6 +77,13 @@ const AppContent = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          {/* {otherpages} */}
+
+          <Route path="/ir-icon" element={<ComingSoonPage />} />
+          <Route path="/socials" element={<ComingSoonPage />} />
+          <Route path="/avatar-store" element={<ComingSoonPage />} />
+
+
 
           {/* Newsletter */}
           <Route element={<MainLayout />}>

@@ -3,6 +3,7 @@
 .page-flip-container {
   perspective: 1500px;
   width: 100%;
+  /* height: auto !important; */
   position: relative;
   /* We will set height dynamically via inline style, but a min-height is good for loading */
   min-height: 100vh; 
@@ -50,4 +51,5 @@
 .content-wrapper {
   /* This ensures the wrapper itself has no odd layout behavior */
   display: block; 
+  height: auto !important;
 }

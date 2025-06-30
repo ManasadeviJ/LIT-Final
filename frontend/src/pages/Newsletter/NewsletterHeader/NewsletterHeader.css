@@ -12,6 +12,9 @@
   text-align: center;
 }
 
+.hero-title span {
+  font-family: 'Krona One', sans-serif;
+}
 /* Dark overlay for text readability */
 .hero-overlay {
   position: absolute;

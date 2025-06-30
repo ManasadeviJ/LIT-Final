@@ -21,7 +21,7 @@ const LandingPage = () => {
         <UnfoldingSoonSection />
         <Testimonials />
         <RegisterInterest />
-        <Footer />
+        {/* <Footer /> */}
       </Background>
     </div>
   );
