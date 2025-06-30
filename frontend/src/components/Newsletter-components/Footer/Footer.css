@@ -354,3 +354,9 @@
 }
 
 /* End of Footer CSS */
+
+.subscription-status {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #a855f7; /* You can change to red for errors, green for success */
+}

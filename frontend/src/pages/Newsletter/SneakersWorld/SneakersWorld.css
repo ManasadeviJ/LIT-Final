@@ -1,6 +1,7 @@
 /* === Sneaker World Section === */
 .sw-section {
   margin-bottom: 120px;
+  height: auto !important; /* Ensure the section height is auto */
 }
 
 .sw-title-container {

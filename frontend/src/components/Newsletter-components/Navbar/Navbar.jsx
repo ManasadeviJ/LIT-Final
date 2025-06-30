@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 import litLogo from '../../../assets/lit-logo.png';
-import profileAvatar from '../../../assets/profile-avatar.png';
+import profileAvatar from '../../../assets/noprofile.jpeg';
 import notificationIcon from '../../../assets/notification-icon.svg';
 
 const Navbar = () => {

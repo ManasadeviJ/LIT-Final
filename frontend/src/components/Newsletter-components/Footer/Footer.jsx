@@ -1,32 +1,37 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
-import SubscriptionForm from '../shared/SubscriptionForm';
 
 import logo from "../../../assets/lit-logo.png";
 import emailIcon from "../../../assets/email-logo.svg";
 import linkedinIcon from "../../../assets/linkedin-logo.svg";
 import instagramIcon from "../../../assets/instagram-logo.svg";
 import twitterIcon from "../../../assets/twitter-logo.svg";
-// import googlePlayIcon from "../../../assets/google-play.png";
-// import appStoreBadge from "../../../assets/app-store.png";
 import googlePlayBadge from "../../../assets/googlePlayBadge.png";
 import appStoreBadge from "../../../assets/app-store-badge.svg";
-
-
+import { subscribeToNewsletter } from "../../../services/api";
 
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState('');
   const dropdownRef = useRef();
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
     if (!email) {
-      alert('Please enter your email address.');
+      setSubscriptionStatus('Please enter your email address.');
       return;
     }
-    alert(`Thank you for subscribing with ${email}!`);
-    setEmail('');
+
+    try {
+      const res = await subscribeToNewsletter(email);
+      setSubscriptionStatus(res.message || 'Successfully subscribed!');
+      setEmail('');
+    } catch (error) {
+      setSubscriptionStatus(
+        error?.response?.data?.message || 'Subscription failed. Try again.'
+      );
+    }
   };
 
   useEffect(() => {
@@ -40,7 +45,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer-container">
+    <footer className="footer-container" id="footer-community-section">
       <div className="footer-content">
         <div className="footer-main">
           <div className="footer-logo-section dropdown-container" ref={dropdownRef}>
@@ -67,11 +72,22 @@ const Footer = () => {
         <div className="footer-secondary">
           <div className="footer-join-section">
             <h3>Join our Community</h3>
-            <SubscriptionForm
-              inputClassName="footer-email-input"
-              buttonClassName="footer-subscribe-btn"
-              containerClassName="footer-email-container"
-            />
+            <div className="footer-email-container">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="footer-email-input"
+                required
+              />
+              <button onClick={handleSubscribe} className="footer-subscribe-btn">
+                Subscribe
+              </button>
+            </div>
+            {subscriptionStatus && (
+              <p className="subscription-status">{subscriptionStatus}</p>
+            )}
           </div>
 
           <div className="footer-contact-section">
@@ -101,7 +117,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* ✅ Updated Footer Store Buttons */}
           <div className="footer-store-buttons">
             <a 
               href="https://play.google.com" 

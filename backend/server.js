@@ -3,23 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-// Route imports - Ecommerce
-const productRoutes = require('./routes/productRoutes');
-const userRoutes = require('./routes/userRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const couponRoutes = require('./routes/couponRoutes');
-
-// Route imports - Newsletter
-const articleRoutes = require('./routes/articleRoutes');
-const mailArticleRoutes = require('./routes/mailArticleRoutes');
-const fastFashionRoutes = require('./routes/fastFashionRoutes');
-const luxuryFashionRoutes = require('./routes/luxuryFashionRoutes');
-const sustainableFashionRoutes = require('./routes/sustainableFashionRoutes');
-const sneakerWorldRoutes = require('./routes/sneakerWorldRoutes');
-
-// Error middleware
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -38,6 +21,29 @@ mongoose.connect(process.env.MONGODB_URI, {
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
+// ===========================
+// Route Imports
+// ===========================
+
+// Ecommerce Routes
+const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const couponRoutes = require('./routes/couponRoutes');
+
+// Newsletter Routes
+const articleRoutes = require('./routes/articleRoutes');
+const mailArticleRoutes = require('./routes/mailArticleRoutes');
+const fastFashionRoutes = require('./routes/fastFashionRoutes');
+const luxuryFashionRoutes = require('./routes/luxuryFashionRoutes');
+const sustainableFashionRoutes = require('./routes/sustainableFashionRoutes');
+const sneakerWorldRoutes = require('./routes/sneakerWorldRoutes');
+const subscriberRoutes = require('./routes/subscriberRoutes'); // ✅ NEW
+
+// ===========================
+// Mount Routes
+// ===========================
+
 // Ecommerce API Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
@@ -51,13 +57,15 @@ app.use('/api/fast-fashion', fastFashionRoutes);
 app.use('/api/luxury-fashion', luxuryFashionRoutes);
 app.use('/api/sustainable-fashion', sustainableFashionRoutes);
 app.use('/api/sneaker-world', sneakerWorldRoutes);
+app.use('/api/newsletter', subscriberRoutes); // ✅ NEW
 
 // Root Route
 app.get('/', (req, res) => {
   res.send('🚀 Unified API for Ecommerce + Newsletter is running...');
 });
 
-// Error Handling Middleware
+// Error Middleware
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 app.use(notFound);
 app.use(errorHandler);
 

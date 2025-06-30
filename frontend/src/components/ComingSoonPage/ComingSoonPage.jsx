@@ -11,11 +11,11 @@ const ComingSoonPage = () => {
       <div className="coming-soon-content">
         <img src={rocketIcon} alt="Launching soon" className="coming-soon-icon" />
         
-        <h1>Coming Soon</h1>
+        <h1>COMING SOON</h1>
         <p>
           We're working hard to bring you this feature.
-          <br />
-          Stay tuned for launch!
+          <br/>
+          Stay tuned for the launch!
         </p>
         
         <button 

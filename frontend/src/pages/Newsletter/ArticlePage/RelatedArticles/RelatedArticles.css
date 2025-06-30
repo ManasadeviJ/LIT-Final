@@ -9,6 +9,7 @@
   font-size: 32px;
   margin-bottom: 40px;
 }
+
 .related-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

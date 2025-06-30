@@ -15,7 +15,8 @@ import Background from './components/Background/Background';
 import Footer from "./components/Newsletter-components/Footer/Footer";
 import LandingPageNavbar from './components/Newsletter-components/Navbar/Navbar';
 import Navbar from './components/Newsletter-components/Navbar/Navbar';
-import MainLayout from './components/Newsletter-components/MainLayout/MainLayout';
+// --- CHANGE: MainLayout import removed as it wasn't being used correctly
+// import MainLayout from './components/Newsletter-components/MainLayout/MainLayout'; 
 import ProtectedRoute from './components/admin-components/ProtectedRoute';
 import AdminLayout from './components/admin-components/AdminLayout';
 
@@ -45,6 +46,12 @@ import AdminArticlePage from './pages/admin/ArticlePage';
 
 import NewsletterPage from './pages/Newsletter/NewsletterPage/NewsletterPage';
 import NewsletterArticlePage from './pages/Newsletter/ArticlePage/ArticlePage';
+
+// --- CHANGE: Removed unused page imports ---
+// import SustainabilityPage from './pages/Newsletter/SustainableFashion/SustainableFashion';
+// import LuxuryPage from './pages/Newsletter/LuxuryFashion/LuxuryFashion';
+// import FastFashionPage from './pages/Newsletter/FastFashion/FastFashion';
+// import SneakerPage from './pages/Newsletter/SneakersWorld/SneakersWorld';
 
 const AppContent = () => {
   const location = useLocation();
@@ -77,19 +84,20 @@ const AppContent = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          {/* {otherpages} */}
-
           <Route path="/ir-icon" element={<ComingSoonPage />} />
           <Route path="/socials" element={<ComingSoonPage />} />
           <Route path="/avatar-store" element={<ComingSoonPage />} />
 
-
-
           {/* Newsletter */}
-          <Route element={<MainLayout />}>
-            <Route path="/newsletter" element={<NewsletterPage />} />
-          </Route>
+          {/* --- CHANGE: Simplified the newsletter route and removed the now-redundant routes --- */}
+          <Route path="/newsletter" element={<NewsletterPage />} />
           <Route path="/newsletter/article/:slug" element={<NewsletterArticlePage />} />
+          
+          {/* --- The following routes are now handled by the logic above and can be removed --- */}
+          {/* <Route path="/sustainability" element={<SustainabilityPage />} /> */}
+          {/* <Route path="/luxury" element={<LuxuryPage />} /> */}
+          {/* <Route path="/fast-fashion" element={<FastFashionPage />} /> */}
+          {/* <Route path="/sneakers" element={<SneakerPage />} /> */}
 
           {/* Admin */}
           <Route path="/admin/login" element={<AdminLogin />} />

@@ -7,7 +7,7 @@ body {
   color: #fff;
 }
 
-
+ 
 /* App container */
 #root {
   display: flex;
@@ -16,20 +16,13 @@ body {
 }
 
 /* Main content area */
-/* main {
+main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
-} */
-
-main {
-  flex: 1; /* This is correct, it makes main content take available space */
-  width: 100%; /* Ensure it takes full width */
-  display: block; /* Change flex to block to let content flow naturally */
-  padding: 0; /* Remove padding, let individual pages control it */
 }
 
 /* Background image - Removed as per original */

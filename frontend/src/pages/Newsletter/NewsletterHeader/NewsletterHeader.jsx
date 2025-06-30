@@ -4,7 +4,7 @@ import './NewsletterHeader.css';
 // Import all three images
 import defaultImage from '../../../assets/Newsletter/pexels-pixabay-265705.jpg';
 import domesticImage from '../../../assets/Newsletter/luthfi-ali-qodri-IfMv7JSdT3E-unsplash.jpg';
-const internationalImage = new URL('../../assets/Newsletter/pretty lady.jpg', import.meta.url).href;
+import internationalImage from '../../../assets/Newsletter/pretty lady.jpg';
 
 const NewsletterHeader = ({ activeFilter, onFilterChange, isFlipping }) => {
   const [headerImage, setHeaderImage] = useState(defaultImage);

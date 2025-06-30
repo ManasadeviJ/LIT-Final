@@ -10,7 +10,7 @@ const DeleteProductForm = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      fetch('http://localhost:3000/api/products')
+      fetch('http://localhost:5000/api/products')
         .then(res => res.json())
         .then(data => setProducts(data))
         .catch(() => setProducts([]));
@@ -29,7 +29,7 @@ const DeleteProductForm = ({ isOpen, onClose }) => {
     setError('');
     setSuccess('');
     try {
-      const response = await fetch(`http://localhost:3000/api/products/${selectedProductId}`, {
+      const response = await fetch(`http://localhost:5000/api/products/${selectedProductId}`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Failed to delete product');
